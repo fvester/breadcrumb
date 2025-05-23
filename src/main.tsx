@@ -4,10 +4,10 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Home from "./pages/Home";
-import Layout from "./Layout";
-import ErrorPage from "./pages/ErrorPage";
-import Species from "./pages/Species";
+import Home from "@/pages/Home";
+import Layout from "@/Layout";
+import ErrorPage from "@/pages/ErrorPage";
+import Species from "@/pages/Species";
 
 // routing setting
 const router = createBrowserRouter([
