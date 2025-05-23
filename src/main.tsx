@@ -1,15 +1,12 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom/client";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import Home from "@/pages/Home";
-import Layout from "@/Layout";
-import ErrorPage from "@/pages/ErrorPage";
-import Species from "@/pages/Species";
+import * as React from 'react';
+import * as ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Home from '@/pages/Home';
+import Layout from '@/Layout';
+import ErrorPage from '@/pages/ErrorPage';
+import Species from '@/pages/Species';
 
-// routing setting
+// URLrouting setting 
 const router = createBrowserRouter([
   {
     path: '/',
@@ -21,15 +18,15 @@ const router = createBrowserRouter([
       },
       {
         path: '/species',
-        element: <Species />
-      }
+        element: <Species />,
+      },
     ],
     errorElement: <ErrorPage />,
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </React.StrictMode>,
 );
