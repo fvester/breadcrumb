@@ -1,7 +1,7 @@
 import BreadCrumb from '@/components/BreadCrumb';
 import './SpeciesOverview.scss';
 import { Link, useLocation, useParams } from 'react-router-dom';
-import type { PrevPageState, RouteInfo } from '@/types/types';
+import type { PrevPageState, RouteInfo } from '@/types/components';
 
 // Species Overview Page
 const SpeciesOverview = () => {
