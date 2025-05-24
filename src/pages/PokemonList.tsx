@@ -1,5 +1,6 @@
 import './PokemonList.scss';
 
+// Pokemon List Page
 const PokemonList = () => {
   return (
     <div id="pokemon-list">

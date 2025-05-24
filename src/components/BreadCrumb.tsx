@@ -1,28 +1,53 @@
 import type { RouteInfo } from '@/types/types';
 import './BreadCrumb.scss';
 import SubCrumb from './SubCrumb';
-import { useLocation } from 'react-router-dom';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface BreadCrumbProps {
-  route_history: RouteInfo[];
+  routeHistory: RouteInfo[];
+  curPath: string;
 }
 
-const BreadCrumb: React.FC<BreadCrumbProps> = ({ route_history }) => {
-  const { pathname: cur_path } = useLocation();
+const BreadCrumb: React.FC<BreadCrumbProps> = ({ routeHistory, curPath }) => {
+  const navigate = useNavigate();
+
+  const pathClick = (path: string) => {
+    console.log(`Navigate to ${path}`);
+
+    // Make prevRouteHistory
+    const idx = routeHistory.findIndex((routeInfo) => routeInfo.path == path);
+    const prevRouteHistory: RouteInfo[] = routeHistory.slice(0, idx);
+    // Todo: if idx == -1
+
+    navigate(path, {
+      state: {
+        prevRouteHistory,
+      },
+    });
+  };
 
   return (
     <div id="bread-crumb">
       <nav className="bread-crumb-nav">
-        {route_history.map((info: RouteInfo) => {
-          const { sig_name, path } = info;
-          const is_cur: boolean = path === cur_path;
+        {routeHistory.map((routeInfo: RouteInfo) => {
+          const { sigName, path } = routeInfo;
+          const isCur: boolean = path === curPath;
 
-          return is_cur ? (
-            <SubCrumb key={path} sig_name={sig_name} path="" />
+          return isCur ? (
+            <SubCrumb
+              key={path}
+              routeInfo={{ sigName: sigName, path: '' }}
+              isCur={isCur}
+              pathClick={pathClick}
+            />
           ) : (
             <React.Fragment key={path}>
-              <SubCrumb sig_name={sig_name} path={path} />
+              <SubCrumb
+                routeInfo={routeInfo}
+                isCur={isCur}
+                pathClick={pathClick}
+              />
               <div className="bread-crumb-nav-deli"> {'>'} </div>
             </React.Fragment>
           );

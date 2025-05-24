@@ -1,27 +1,34 @@
 import type { RouteInfo } from '@/types/types';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import './SubCrumb.scss';
 
-const SubCrumb: React.FC<RouteInfo> = ({ sig_name, path }) => {
-  const navigate = useNavigate();
+interface SubCrumbProps {
+  routeInfo: RouteInfo;
+  isCur: boolean;
+  pathClick: (path: string) => void;
+}
 
-  const has_link: boolean = path !== '';
+const SubCrumb: React.FC<SubCrumbProps> = ({ routeInfo, isCur, pathClick }) => {
+  const { sigName, path } = routeInfo;
 
   const crumbClick = (e: React.MouseEvent) => {
-    e.preventDefault();
+    e.preventDefault(); // Ignore Link tag default click event
 
-    if (has_link) {
-      navigate(path);
+    if (!isCur) {
+      pathClick(path); // Toss navigation logic to parent component by callback
     }
   };
 
   return (
     <div id="sub-crumb">
       <Link
-        className={has_link ? 'sub-crumb-content' : 'sub-crumb-content disable'}
+        className={
+          path != '' ? 'sub-crumb-content' : 'sub-crumb-content disabled'
+        }
         to={path}
         onClick={crumbClick}
       >
-        {sig_name}
+        {sigName}
       </Link>
     </div>
   );

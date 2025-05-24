@@ -3,17 +3,23 @@ import './Home.scss';
 import { Link, useLocation } from 'react-router-dom';
 import type { RouteInfo } from '@/types/types';
 
+// Home Page Component
 const Home = () => {
-  const sig_name: string = 'Home';
+  const { pathname: curPath } = useLocation();
+  const sigName: string = 'Home';
 
-  const cur_route_info: RouteInfo = { sig_name: sig_name, path: '/' };
+  const curRouteInfo: RouteInfo = { sigName: sigName, path: curPath };
 
   return (
     <div id="home">
       <h1>Home</h1>
-      <BreadCrumb route_history={[cur_route_info]} />
+      <BreadCrumb routeHistory={[curRouteInfo]} curPath={curPath} />
 
-      <Link className="species-button" to="/species">
+      <Link
+        className="species-button"
+        to="/species"
+        state={{ prevRouteHistory: [curRouteInfo] }}
+      >
         Pokemon Species List
       </Link>
     </div>
