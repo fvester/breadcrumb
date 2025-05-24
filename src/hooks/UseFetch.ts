@@ -1,6 +1,8 @@
+import type { PageResponse } from '@/types/model';
 import { useEffect, useState } from 'react';
 
-export function useFetch(urlPath: string) {
+// Fetch custom hook
+export function useFetch(urlPath: string, page: boolean) {
   const [data, setData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -12,21 +14,48 @@ export function useFetch(urlPath: string) {
 
       const url = import.meta.env.VITE_BACKEND_URL + urlPath;
 
-      try {
-        const res: Response = await fetch(url);
-        if (!res.ok) throw new Error('Request failed');
+      // Todo: fix code. it is just simple total page call for mvp.
+      if (page) {
+        try {
+          const res: Response = await fetch(url);
+          if (!res.ok) throw new Error('Page Request failed');
 
-        const data = await res.json();
+          const initData: PageResponse = await res.json();
+          const count = initData.count;
 
-        setData(data);
-      } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          throw error;
+          const totalRes: Response = await fetch(
+            `${url}?offset=0&limit=${count}`,
+          );
+
+          const totalData: PageResponse = await totalRes.json();
+
+          setData(totalData.results);
+        } catch (error) {
+          if (error instanceof Error) {
+            setError(error.message);
+          } else {
+            throw error;
+          }
+        } finally {
+          setIsLoading(false);
         }
-      } finally {
-        setIsLoading(false);
+      } else {
+        try {
+          const res: Response = await fetch(url);
+          if (!res.ok) throw new Error('Request failed');
+
+          const data = await res.json();
+
+          setData(data);
+        } catch (error) {
+          if (error instanceof Error) {
+            setError(error.message);
+          } else {
+            throw error;
+          }
+        } finally {
+          setIsLoading(false);
+        }
       }
     }
 

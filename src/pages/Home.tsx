@@ -1,7 +1,7 @@
 import BreadCrumb from '@/components/BreadCrumb';
 import './Home.scss';
 import { Link, useLocation } from 'react-router-dom';
-import type { RouteInfo } from '@/types/types';
+import type { RouteInfo } from '@/types/components';
 
 // Home Page Component
 const Home = () => {

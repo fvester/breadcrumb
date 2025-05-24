@@ -1,4 +1,4 @@
-import type { RouteInfo } from '@/types/types';
+import type { RouteInfo } from '@/types/components';
 import './BreadCrumb.scss';
 import SubCrumb from './SubCrumb';
 import React from 'react';
