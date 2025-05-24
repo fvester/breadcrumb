@@ -1,3 +1,5 @@
+import './Species.scss';
+
 const Home = () => {
   return (
     <div id="species">
