@@ -1,4 +1,4 @@
-import type { RouteInfo } from '@/types/types';
+import type { RouteInfo } from '@/types/components';
 import { Link } from 'react-router-dom';
 import './SubCrumb.scss';
 
