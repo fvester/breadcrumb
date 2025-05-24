@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export function useFetch(url: string) {
+export function useFetch(urlPath: string) {
   const [data, setData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -10,13 +10,13 @@ export function useFetch(url: string) {
       setIsLoading(true);
       setError(null);
 
+      const url = import.meta.env.VITE_BACKEND_URL + urlPath;
+
       try {
         const res: Response = await fetch(url);
         if (!res.ok) throw new Error('Request failed');
 
         const data = await res.json();
-
-        console.log(data);
 
         setData(data);
       } catch (error) {
