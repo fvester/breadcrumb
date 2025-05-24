@@ -1,14 +1,16 @@
+import './base.scss';
+
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from '@/pages/Home';
+
 import Layout from '@/Layout';
 import ErrorPage from '@/pages/ErrorPage';
-import Species from '@/pages/Species';
-import './base.scss';
-import SpeciesOverview from '@/pages/SpeciesOverview';
-import PokemonList from '@/pages/PokemonList';
+import Home from '@/pages/Home';
 import PokemonDetail from '@/pages/PokemonDetail';
+import PokemonList from '@/pages/PokemonList';
+import Species from '@/pages/Species';
+import SpeciesOverview from '@/pages/SpeciesOverview';
 
 // URLrouting setting
 const router = createBrowserRouter([
