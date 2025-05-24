@@ -13,9 +13,7 @@ const Species = () => {
   const sigName = 'Pokemon Species List';
   const curRouteInfo: RouteInfo = { sigName: sigName, path: curPath };
 
-  const { data, isLoading, error } = useFetch(
-    'https://pokeapi.co/api/v2/pokemon-species',
-  );
+  const { data, isLoading, error } = useFetch('/pokemon-species');
 
   console.log(data);
   console.log(isLoading);
