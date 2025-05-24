@@ -5,8 +5,9 @@ import Home from '@/pages/Home';
 import Layout from '@/Layout';
 import ErrorPage from '@/pages/ErrorPage';
 import Species from '@/pages/Species';
+import './base.scss';
 
-// URLrouting setting 
+// URLrouting setting
 const router = createBrowserRouter([
   {
     path: '/',
