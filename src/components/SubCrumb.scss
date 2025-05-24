@@ -2,8 +2,7 @@
     text-decoration: underline;
 }
 
-.sub-crumb-content {
-    .disabled {
-        text-decoration: none;
-    }
+.sub-crumb-content.disabled{
+    text-decoration: none;
+    pointer-events: none;
 }

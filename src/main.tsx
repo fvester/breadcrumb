@@ -16,7 +16,7 @@ import SpeciesOverview from '@/pages/SpeciesOverview';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
+    element: <Layout />, // For header, footer
     children: [
       {
         index: true,
