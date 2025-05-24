@@ -2,6 +2,7 @@ import type { PrevPageState, RouteInfo } from '@/types/types';
 import './Species.scss';
 import { Link, useLocation } from 'react-router-dom';
 import BreadCrumb from '@/components/BreadCrumb';
+import { useFetch } from '@/hooks/UseFetch';
 
 // Species List Page
 const Species = () => {
@@ -11,6 +12,14 @@ const Species = () => {
 
   const sigName = 'Pokemon Species List';
   const curRouteInfo: RouteInfo = { sigName: sigName, path: curPath };
+
+  const { data, isLoading, error } = useFetch(
+    'https://pokeapi.co/api/v2/pokemon-species',
+  );
+
+  console.log(data);
+  console.log(isLoading);
+  console.log(error);
 
   return (
     <div id="species">
