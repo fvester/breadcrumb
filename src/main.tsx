@@ -6,6 +6,9 @@ import Layout from '@/Layout';
 import ErrorPage from '@/pages/ErrorPage';
 import Species from '@/pages/Species';
 import './base.scss';
+import SpeciesOverview from '@/pages/SpeciesOverview';
+import PokemonList from '@/pages/PokemonList';
+import PokemonDetail from '@/pages/PokemonDetail';
 
 // URLrouting setting
 const router = createBrowserRouter([
@@ -20,6 +23,18 @@ const router = createBrowserRouter([
       {
         path: '/species',
         element: <Species />,
+      },
+      {
+        path: '/species/:species',
+        element: <SpeciesOverview />,
+      },
+      {
+        path: '/species/:species/pokemons',
+        element: <PokemonList />,
+      },
+      {
+        path: '/species/:species/pokemons/:pokemon',
+        element: <PokemonDetail />,
       },
     ],
     errorElement: <ErrorPage />,
