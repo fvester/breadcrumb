@@ -1,5 +1,6 @@
 import './PokemonDetail.scss';
 
+// Pokemon Detail page
 const PokemonDetail = () => {
   return (
     <div id="pokemon-detail">
