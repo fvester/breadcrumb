@@ -1,16 +1,16 @@
 import type { RouteInfo } from '@/types/components';
 import './Species.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import BreadCrumb from '@/components/BreadCrumb';
 import { useFetch } from '@/hooks/UseFetch';
 import type { PageResponse, SpeciesMeta } from '@/types/model';
 import { useGenerateHistory } from '@/hooks/UseGenerateHistory';
-import { useEffect } from 'react';
 // import { useFetchRecur } from '@/hooks/UseFetchRecur';
 
 // Species List Page
 const Species: React.FC = () => {
   const { location, curPath, prevRouteHistory } = useGenerateHistory();
+  const navigage = useNavigate();
   // Test code
   // const { data, isLoading, error } = useFetchRecur('/pokemon-species');
 
@@ -19,26 +19,48 @@ const Species: React.FC = () => {
     true,
   );
 
+  const listItemClick = (e: React.MouseEvent, speciesId: number) => {
+    navigage(`/species/${speciesId}`, {
+      state: {
+        prevRouteHistory: [...(prevRouteHistory ?? []), curRouteInfo],
+      },
+    });
+  };
+
   const sigName = 'Pokemon Species List';
   const curRouteInfo: RouteInfo = { sigName: sigName, path: curPath };
 
   const speciesList = (data as PageResponse<SpeciesMeta> | null)?.results;
-  //pokeapi.co/api/v2/pokemon-species/2/
 
-  return (
-    <div className="species">
-      <h1>Species</h1>
-      <BreadCrumb
-        className="species"
-        routeHistory={[...(prevRouteHistory ?? []), curRouteInfo]}
-        curPath={curPath}
-      />
+  const sectionObj: Record<string, SpeciesMeta[]> = {};
 
-      <ul className="species-list">
-        {isLoading ? (
-          <div> loading </div>
-        ) : (
-          speciesList?.map((meta: SpeciesMeta) => {
+  // Sort name
+  speciesList?.sort((a, b) =>
+    a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1,
+  );
+
+  let setList = null;
+
+  // Ascii code a~z
+  // Divide section
+  if (speciesList) {
+    for (let i = 97; i < 123; i++) {
+      const sectionList = speciesList.filter(
+        (v) => v.name.toLowerCase().charAt(0) === String.fromCharCode(i),
+      );
+
+      sectionObj[String.fromCharCode(i)] = sectionList;
+    }
+
+    const sectionArr = [];
+    // Make setList var
+    for (const alphabet in sectionObj) {
+      const sectionComp = (
+        <ul>
+          <div className="species-list-header">
+            <div>{alphabet.toUpperCase()}</div>
+          </div>
+          {sectionObj[alphabet].map((meta: SpeciesMeta) => {
             const { name, url } = meta;
 
             // Need optimize
@@ -49,25 +71,50 @@ const Species: React.FC = () => {
               return null;
             } else {
               return (
-                <li key={speciesId} className="species-list-item">
-                  <Link
-                    className="species-list-item-link"
-                    to={`/species/${speciesId}`}
-                    state={{
-                      prevRouteHistory: [
-                        ...(prevRouteHistory ?? []),
-                        curRouteInfo,
-                      ],
-                    }}
-                  >
-                    {name}
-                  </Link>
+                <li
+                  key={speciesId}
+                  className="species-list-item"
+                  onClick={(e: React.MouseEvent) => listItemClick(e, speciesId)}
+                >
+                  <div>{name}</div>
                 </li>
               );
             }
-          })
-        )}
-      </ul>
+          })}
+        </ul>
+      );
+
+      sectionArr.push(sectionComp);
+    }
+
+    console.log(sectionArr);
+
+    setList = (
+      <div className="species-list-content">{sectionArr.map((v) => v)}</div>
+    );
+  }
+
+  return (
+    <div className="species">
+      <div className="species-container">
+        <div className="species-align">
+          <BreadCrumb
+            className="species"
+            routeHistory={[...(prevRouteHistory ?? []), curRouteInfo]}
+            curPath={curPath}
+          />
+        </div>
+
+        <div className="species-list-container">
+          <ul className="species-list">
+            <div className="species-list-title">
+              <div>Pokemon Species</div>
+            </div>
+
+            {isLoading ? <div> loading </div> : setList}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 };

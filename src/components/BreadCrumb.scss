@@ -6,6 +6,10 @@
     border-radius: 10px;
     padding: 8px 12px;
     text-align: center;
+    position: fixed;
+    top: 170px;
+    left: 50px;
+    font-size: 1rem;
 
     &-nav {
         display: flex;
@@ -17,6 +21,10 @@
     }
 
     &-nav-arrow {
-        fill: base.$color-font-blue-light;
+        fill: base.$color-font-light-blue;
+    }
+
+    @media (max-width: 1100px) {
+        font-size: 0.8rem;
     }
 }
