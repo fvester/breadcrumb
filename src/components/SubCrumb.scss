@@ -1,8 +1,16 @@
-.sub-crumb-content {
-    text-decoration: underline;
-}
+@use '@/base';
 
-.sub-crumb-content.disabled{
-    text-decoration: none;
-    pointer-events: none;
+.sub-crumb {
+    display: flex;
+    align-items: center;
+
+    &-content {
+        color: base.$color-font-blue;
+        text-decoration: underline;
+
+        &.disabled {
+            text-decoration: none;
+            pointer-events: none;
+        }
+    }
 }
