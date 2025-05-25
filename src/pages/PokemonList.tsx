@@ -13,13 +13,13 @@ const PokemonList = () => {
 
   const { species: speciesId } = useParams();
 
-  const sigName = 'Pokemon List';
-  const curRouteInfo: RouteInfo = { sigName: sigName, path: curPath };
-
   const { data, isLoading, error } = useFetch<SpeciesOverviewRes>(
     `/pokemon-species/${speciesId}`,
     false,
   );
+
+  const sigName = 'Pokemon List';
+  const curRouteInfo: RouteInfo = { sigName: sigName, path: curPath };
 
   const varieties: PokemonMeta[] | null = data?.varieties;
 

@@ -9,8 +9,7 @@ import { useGenerateHistory } from '@/hooks/UseGenerateHistory';
 
 // Species Overview Page
 const SpeciesOverview = () => {
-  const { location, curPath, prevRouteHistory } = useGenerateHistory();
-
+  const { curPath, prevRouteHistory } = useGenerateHistory();
   const { species: speciesId } = useParams();
 
   const { data, isLoading, error } = useFetch<SpeciesOverviewRes>(

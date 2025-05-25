@@ -1,11 +1,12 @@
 import type { PageResponse } from '@/types/model';
 import { useEffect, useState } from 'react';
+import { useValidate } from './UseValidate';
 
 // Fetch custom hook
 export function useFetch<T>(urlPath: string, page: boolean) {
   const [data, setData] = useState<T | PageResponse<T> | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const { error, setError } = useValidate();
 
   useEffect(() => {
     async function fetchData() {
