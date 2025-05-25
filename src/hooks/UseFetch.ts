@@ -60,7 +60,7 @@ export function useFetch<T>(urlPath: string, page: boolean) {
     }
 
     fetchData();
-  }, []);
+  }, [urlPath]);
 
   return { data, isLoading, error };
 }

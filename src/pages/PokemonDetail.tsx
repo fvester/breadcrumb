@@ -1,17 +1,17 @@
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import './PokemonDetail.scss';
 import type { PokemonDetailRes } from '@/types/model';
 import { useFetch } from '@/hooks/UseFetch';
-import type { PrevPageState, RouteInfo } from '@/types/components';
+import type { RouteInfo } from '@/types/components';
 import BreadCrumb from '@/components/BreadCrumb';
+import { useGenerateHistory } from '@/hooks/UseGenerateHistory';
 
 // Pokemon Detail page
 const PokemonDetail = () => {
-  const location = useLocation();
+  const { curPath, prevRouteHistory } = useGenerateHistory();
   const { species: speciesId, pokemon: pokemonId } = useParams();
-  const curPath: string = location.pathname;
-  const { prevRouteHistory } = location.state as PrevPageState;
 
+  // Get current page data
   const { data, isLoading, error } = useFetch<PokemonDetailRes>(
     `/pokemon/${pokemonId}`,
     false,
@@ -27,7 +27,7 @@ const PokemonDetail = () => {
     <div id="pokemon-detail">
       <h1>Pokemon Detail</h1>
       <BreadCrumb
-        routeHistory={[...prevRouteHistory, curRouteInfo]}
+        routeHistory={[...(prevRouteHistory ?? []), curRouteInfo]}
         curPath={curPath}
       />
 
