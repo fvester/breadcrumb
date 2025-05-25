@@ -8,7 +8,7 @@ import { snakeToCamel } from '@/utils/string';
 import { useGenerateHistory } from '@/hooks/UseGenerateHistory';
 
 // Species Overview Page
-const SpeciesOverview = () => {
+const SpeciesOverview: React.FC = () => {
   const { curPath, prevRouteHistory } = useGenerateHistory();
   const { species: speciesId } = useParams();
 
