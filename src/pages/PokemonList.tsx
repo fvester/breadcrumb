@@ -24,7 +24,7 @@ const PokemonList: React.FC = () => {
   const varieties: PokemonMeta[] | null = data?.varieties;
 
   return (
-    <div id="pokemon-list">
+    <div className="pokemon-list">
       <h1>Pokemon List</h1>
       <BreadCrumb
         routeHistory={[...(prevRouteHistory ?? []), curRouteInfo]}

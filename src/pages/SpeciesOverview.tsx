@@ -41,7 +41,7 @@ const SpeciesOverview: React.FC = () => {
   const curRouteInfo: RouteInfo = { sigName: sigName, path: curPath };
 
   return (
-    <div id="species-overview">
+    <div className="species-overview">
       <h1>Species Overview</h1>
       <BreadCrumb
         routeHistory={[...(prevRouteHistory ?? []), curRouteInfo]}
