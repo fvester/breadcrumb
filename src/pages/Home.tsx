@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import type { RouteInfo } from '@/types/components';
 
 // Home Page Component
-const Home = () => {
+const Home: React.FC = () => {
   const { pathname: curPath } = useLocation();
   const sigName: string = 'Home';
 

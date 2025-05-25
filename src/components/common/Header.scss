@@ -1,0 +1,24 @@
+@use "@/base";
+
+#header {
+    background-color: base.$point-color-blue;
+    height: base.$header-height;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.header-container {
+    display: flex;
+    width: 85%;
+    justify-content: space-between;
+
+}
+
+.header-title{
+    font-size: 2.5rem;
+    color: base.$point-color-yellow;
+    font-family: "Fredoka", bold;
+}

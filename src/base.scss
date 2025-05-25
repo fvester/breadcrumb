@@ -1,6 +1,38 @@
 // Global setting (color, font)
 
-a {
-  text-decoration: underline;
-  color: inherit;
+$header-height: 120px;
+
+$point-color-blue: #3461A8;
+$point-color-yellow: #F8C605;
+
+// Font
+
+@font-face {
+  font-family: "Fredoka";
+  src: url(@/fonts/Fredoka-Bold.ttf);
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Fredoka";
+  src: url(@/fonts/Fredoka-Light.ttf);
+  font-weight: Light;
+}
+
+@font-face {
+  font-family: "Fredoka";
+  src: url(@/fonts/Fredoka-Medium.ttf);
+  font-weight: Medium;
+}
+
+@font-face {
+  font-family: "Fredoka";
+  src: url(@/fonts/Fredoka-Regular.ttf);
+  font-weight: Normal;
+}
+
+@font-face {
+  font-family: "Fredoka";
+  src: url(@/fonts/Fredoka-SemiBold.ttf);
+  font-weight: 600;
 }

@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 // import { useFetchRecur } from '@/hooks/UseFetchRecur';
 
 // Species List Page
-const Species = () => {
+const Species: React.FC = () => {
   const { location, curPath, prevRouteHistory } = useGenerateHistory();
   // Test code
   // const { data, isLoading, error } = useFetchRecur('/pokemon-species');
