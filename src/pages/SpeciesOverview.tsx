@@ -30,7 +30,6 @@ const SpeciesOverview = () => {
   } catch (error) {
     if (error instanceof Error) {
       // Todo: no data or request error log
-      if (isLoading) console.log('loading');
     }
   }
 
@@ -57,9 +56,9 @@ const SpeciesOverview = () => {
       <Link
         className="species-overview-button"
         to={`/species/${speciesId}/pokemons`}
-        state={{ prev_route_history: [...prevRouteHistory, curRouteInfo] }}
+        state={{ prevRouteHistory: [...prevRouteHistory, curRouteInfo] }}
       >
-        Pokemon List
+        Show pokemon List
       </Link>
     </div>
   );
