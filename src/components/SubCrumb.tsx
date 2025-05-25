@@ -20,7 +20,7 @@ const SubCrumb: React.FC<SubCrumbProps> = ({ routeInfo, isCur, pathClick }) => {
   };
 
   return (
-    <div id="sub-crumb">
+    <div className="sub-crumb">
       <Link
         className={
           path != '' ? 'sub-crumb-content' : 'sub-crumb-content disabled'

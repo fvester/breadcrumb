@@ -26,7 +26,7 @@ const Species: React.FC = () => {
   //pokeapi.co/api/v2/pokemon-species/2/
 
   return (
-    <div id="species">
+    <div className="species">
       <h1>Species</h1>
       <BreadCrumb
         routeHistory={[...(prevRouteHistory ?? []), curRouteInfo]}
