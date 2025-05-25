@@ -1,3 +1,22 @@
-.bread-crumb-nav {
-    display: flex;
+@use '@/base';
+
+.bread-crumb {
+    display: inline-block;
+    background-color: base.$color-light-blue;
+    border-radius: 10px;
+    padding: 8px 12px;
+    text-align: center;
+
+    &-nav {
+        display: flex;
+    }
+
+    &-nav-deli {
+        display: flex;
+        align-items: center;
+    }
+
+    &-nav-arrow {
+        fill: base.$color-font-blue-light;
+    }
 }

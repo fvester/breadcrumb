@@ -27,6 +27,7 @@ const PokemonDetail: React.FC = () => {
     <div className="pokemon-detail">
       <h1>Pokemon Detail</h1>
       <BreadCrumb
+        className="pokemon-detail"
         routeHistory={[...(prevRouteHistory ?? []), curRouteInfo]}
         curPath={curPath}
       />
