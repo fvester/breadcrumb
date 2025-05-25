@@ -32,3 +32,15 @@ export interface SpeciesOverviewRes {
   varieties: PokemonMeta;
   [key: string]: any;
 }
+
+export interface PokemonDetailRes {
+  name: string;
+  species: {
+    name: string;
+    url: string;
+  };
+  sprites: {
+    front_default: string;
+    back_default: string;
+  };
+}
