@@ -3,7 +3,7 @@ import './Species.scss';
 import { Link, useLocation } from 'react-router-dom';
 import BreadCrumb from '@/components/BreadCrumb';
 import { useFetch } from '@/hooks/UseFetch';
-import type { SpeciesMeta } from '@/types/model';
+import type { PageResponse, SpeciesMeta } from '@/types/model';
 // import { useFetchRecur } from '@/hooks/UseFetchRecur';
 
 // Species List Page
@@ -18,13 +18,12 @@ const Species = () => {
   // Test code
   // const { data, isLoading, error } = useFetchRecur('/pokemon-species');
 
-  const {
-    data: speciesList,
-    isLoading,
-    error,
-  } = useFetch('/pokemon-species', true);
+  const { data, isLoading, error } = useFetch<SpeciesMeta>(
+    '/pokemon-species',
+    true,
+  );
 
-  console.log(speciesList);
+  const speciesList = (data as PageResponse<SpeciesMeta> | null)?.results;
   //pokeapi.co/api/v2/pokemon-species/2/
 
   return (
@@ -39,7 +38,7 @@ const Species = () => {
         {isLoading ? (
           <div> loading </div>
         ) : (
-          speciesList.map((meta: SpeciesMeta) => {
+          speciesList?.map((meta: SpeciesMeta) => {
             const { name, url } = meta;
 
             // Need optimize
@@ -50,7 +49,7 @@ const Species = () => {
               return null;
             } else {
               return (
-                <li className="species-list-item">
+                <li key={speciesId} className="species-list-item">
                   <Link
                     className="species-list-item-link"
                     to={`/species/${speciesId}`}
