@@ -1,0 +1,42 @@
+@use '@/base';
+
+.home {
+    min-height: 100vh;
+    background-color: base.$point-color-blue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 50%;
+    }
+
+    &-banner {
+        display: flex;
+        width: 900px;
+        padding-left: 100px;
+        margin-bottom: 100px;
+
+        @media (max-width: 1000px) {
+            width: 600px;
+            padding-left: 50px;    
+        }
+    }
+
+
+    &-banner-left {
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        flex: 1;
+    } 
+    
+    &-banner-right {
+        flex: 2;
+    }  
+}
+

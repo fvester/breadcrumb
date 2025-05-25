@@ -28,7 +28,7 @@ const BreadCrumb: React.FC<BreadCrumbProps> = ({ routeHistory, curPath }) => {
   };
 
   return (
-    <div id="bread-crumb">
+    <div className="bread-crumb">
       <nav className="bread-crumb-nav">
         {routeHistory.map((routeInfo: RouteInfo) => {
           const { sigName, path } = routeInfo;

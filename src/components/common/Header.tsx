@@ -2,7 +2,7 @@ import './Header.scss';
 
 const Header: React.FC = () => {
   return (
-    <div id="header">
+    <div className="header">
       <div className="header-container">
         <div className="header-title">
           <span>Pokédex</span>

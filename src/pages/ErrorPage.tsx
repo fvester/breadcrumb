@@ -42,7 +42,7 @@ const ErrorPage: React.FC = () => {
   msg += '\n Go home after 5 seconds...';
 
   return (
-    <div id="error-page">
+    <div className="error-page">
       <h1>Error: {reason}</h1>
       <p>{msg}</p>
     </div>
