@@ -4,10 +4,7 @@ interface ObjectLiteral {
   [key: string]: any;
 }
 
-export function snakeToCamel(input: ObjectLiteral | null): ObjectLiteral {
-  if (input == null) {
-    throw Error('There is no data');
-  }
+export function snakeToCamel(input: ObjectLiteral): ObjectLiteral {
   if (_.isArray(input)) {
     return input.map((v) => snakeToCamel(v));
   }

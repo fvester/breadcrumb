@@ -1,17 +1,17 @@
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './PokemonList.scss';
-import type { PrevPageState, RouteInfo } from '@/types/components';
+import type { RouteInfo } from '@/types/components';
 import type { PokemonMeta, SpeciesOverviewRes } from '@/types/model';
 import { useFetch } from '@/hooks/UseFetch';
 import { snakeToCamel } from '@/utils/string';
 import BreadCrumb from '@/components/BreadCrumb';
+import { useGenerateHistory } from '@/hooks/UseGenerateHistory';
 
 // Pokemon List Page
 const PokemonList = () => {
-  const location = useLocation();
+  const { location, curPath, prevRouteHistory } = useGenerateHistory();
+
   const { species: speciesId } = useParams();
-  const curPath: string = location.pathname;
-  const { prevRouteHistory } = location.state as PrevPageState;
 
   const sigName = 'Pokemon List';
   const curRouteInfo: RouteInfo = { sigName: sigName, path: curPath };
@@ -27,7 +27,7 @@ const PokemonList = () => {
     <div id="pokemon-list">
       <h1>Pokemon List</h1>
       <BreadCrumb
-        routeHistory={[...prevRouteHistory, curRouteInfo]}
+        routeHistory={[...(prevRouteHistory ?? []), curRouteInfo]}
         curPath={curPath}
       />
 
@@ -39,14 +39,10 @@ const PokemonList = () => {
             let isDefault: boolean | null = null;
             let pokemon: { name: string; url: string } | null = null;
 
-            try {
-              const { isDefault: isDefaultCopy, pokemon: pokemonCopy } =
-                snakeToCamel(meta);
-              isDefault = isDefaultCopy;
-              pokemon = pokemonCopy;
-            } catch (error) {
-              return null;
-            }
+            const { isDefault: isDefaultCopy, pokemon: pokemonCopy } =
+              snakeToCamel(meta);
+            isDefault = isDefaultCopy;
+            pokemon = pokemonCopy;
 
             if (pokemon == null) return null;
 
@@ -65,7 +61,10 @@ const PokemonList = () => {
                     className="pokemon-list-varieties-item-link"
                     to={`/species/${speciesId}/pokemons/${pokemonId}`}
                     state={{
-                      prevRouteHistory: [...prevRouteHistory, curRouteInfo],
+                      prevRouteHistory: [
+                        ...(prevRouteHistory ?? []),
+                        curRouteInfo,
+                      ],
                     }}
                   >
                     {name}

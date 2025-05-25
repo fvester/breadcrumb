@@ -4,13 +4,12 @@ import { Link, useLocation } from 'react-router-dom';
 import BreadCrumb from '@/components/BreadCrumb';
 import { useFetch } from '@/hooks/UseFetch';
 import type { PageResponse, SpeciesMeta } from '@/types/model';
+import { useGenerateHistory } from '@/hooks/UseGenerateHistory';
 // import { useFetchRecur } from '@/hooks/UseFetchRecur';
 
 // Species List Page
 const Species = () => {
-  const location = useLocation();
-  const curPath = location.pathname;
-  const { prevRouteHistory } = location.state as PrevPageState;
+  const { location, curPath, prevRouteHistory } = useGenerateHistory();
 
   const sigName = 'Pokemon Species List';
   const curRouteInfo: RouteInfo = { sigName: sigName, path: curPath };
@@ -30,7 +29,7 @@ const Species = () => {
     <div id="species">
       <h1>Species</h1>
       <BreadCrumb
-        routeHistory={[...prevRouteHistory, curRouteInfo]}
+        routeHistory={[...(prevRouteHistory ?? []), curRouteInfo]}
         curPath={curPath}
       />
 
@@ -54,7 +53,10 @@ const Species = () => {
                     className="species-list-item-link"
                     to={`/species/${speciesId}`}
                     state={{
-                      prevRouteHistory: [...prevRouteHistory, curRouteInfo],
+                      prevRouteHistory: [
+                        ...(prevRouteHistory ?? []),
+                        curRouteInfo,
+                      ],
                     }}
                   >
                     {name}

@@ -1,17 +1,17 @@
 import BreadCrumb from '@/components/BreadCrumb';
 import './SpeciesOverview.scss';
-import { Link, useLocation, useParams } from 'react-router-dom';
-import type { PrevPageState, RouteInfo } from '@/types/components';
+import { Link, useParams } from 'react-router-dom';
+import type { RouteInfo } from '@/types/components';
 import { useFetch } from '@/hooks/UseFetch';
 import type { SpeciesOverviewName, SpeciesOverviewRes } from '@/types/model';
 import { snakeToCamel } from '@/utils/string';
+import { useGenerateHistory } from '@/hooks/UseGenerateHistory';
 
 // Species Overview Page
 const SpeciesOverview = () => {
-  const location = useLocation();
+  const { location, curPath, prevRouteHistory } = useGenerateHistory();
+
   const { species: speciesId } = useParams();
-  const curPath: string = location.pathname;
-  const { prevRouteHistory } = location.state as PrevPageState;
 
   const { data, isLoading, error } = useFetch<SpeciesOverviewRes>(
     `/pokemon-species/${speciesId}`,
@@ -22,15 +22,11 @@ const SpeciesOverview = () => {
   let baseHappiness: number | null = null;
 
   // Need snake_case -> camelCase mapping function
-  try {
+  if (data !== null) {
     const { names: namesCopy, baseHappiness: baseHappinessCopy } =
       snakeToCamel(data);
     names = namesCopy;
     baseHappiness = baseHappinessCopy;
-  } catch (error) {
-    if (error instanceof Error) {
-      // Todo: no data or request error log
-    }
   }
 
   // Get name
@@ -49,14 +45,16 @@ const SpeciesOverview = () => {
     <div id="species-overview">
       <h1>Species Overview</h1>
       <BreadCrumb
-        routeHistory={[...prevRouteHistory, curRouteInfo]}
+        routeHistory={[...(prevRouteHistory ?? []), curRouteInfo]}
         curPath={curPath}
       />
 
       <Link
         className="species-overview-button"
         to={`/species/${speciesId}/pokemons`}
-        state={{ prevRouteHistory: [...prevRouteHistory, curRouteInfo] }}
+        state={{
+          prevRouteHistory: [...(prevRouteHistory ?? []), curRouteInfo],
+        }}
       >
         Show pokemon List
       </Link>
