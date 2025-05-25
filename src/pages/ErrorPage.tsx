@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 
 // When page not found
-const ErrorPage = () => {
+const ErrorPage: React.FC = () => {
   const error = useRouteError();
   const navigate = useNavigate();
 

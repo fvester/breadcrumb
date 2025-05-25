@@ -8,7 +8,7 @@ import BreadCrumb from '@/components/BreadCrumb';
 import { useGenerateHistory } from '@/hooks/UseGenerateHistory';
 
 // Pokemon List Page
-const PokemonList = () => {
+const PokemonList: React.FC = () => {
   const { location, curPath, prevRouteHistory } = useGenerateHistory();
 
   const { species: speciesId } = useParams();
