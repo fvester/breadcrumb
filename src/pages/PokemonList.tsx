@@ -63,7 +63,7 @@ const PokemonList = () => {
                 <li key={pokemonId} className="pokemon-list-varieties-item">
                   <Link
                     className="pokemon-list-varieties-item-link"
-                    to={`/pokemon/${pokemonId}`}
+                    to={`/species/${speciesId}/pokemons/${pokemonId}`}
                     state={{
                       prevRouteHistory: [...prevRouteHistory, curRouteInfo],
                     }}
