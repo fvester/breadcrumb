@@ -1,19 +1,16 @@
-import type { PrevPageState, RouteInfo } from '@/types/components';
+import type { RouteInfo } from '@/types/components';
 import './Species.scss';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import BreadCrumb from '@/components/BreadCrumb';
 import { useFetch } from '@/hooks/UseFetch';
 import type { PageResponse, SpeciesMeta } from '@/types/model';
 import { useGenerateHistory } from '@/hooks/UseGenerateHistory';
+import { useEffect } from 'react';
 // import { useFetchRecur } from '@/hooks/UseFetchRecur';
 
 // Species List Page
 const Species = () => {
   const { location, curPath, prevRouteHistory } = useGenerateHistory();
-
-  const sigName = 'Pokemon Species List';
-  const curRouteInfo: RouteInfo = { sigName: sigName, path: curPath };
-
   // Test code
   // const { data, isLoading, error } = useFetchRecur('/pokemon-species');
 
@@ -21,6 +18,9 @@ const Species = () => {
     '/pokemon-species',
     true,
   );
+
+  const sigName = 'Pokemon Species List';
+  const curRouteInfo: RouteInfo = { sigName: sigName, path: curPath };
 
   const speciesList = (data as PageResponse<SpeciesMeta> | null)?.results;
   //pokeapi.co/api/v2/pokemon-species/2/
