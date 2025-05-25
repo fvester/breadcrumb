@@ -2,8 +2,8 @@ import type { PageResponse } from '@/types/model';
 import { useEffect, useState } from 'react';
 
 // Fetch custom hook
-export function useFetch(urlPath: string, page: boolean) {
-  const [data, setData] = useState<any>(null);
+export function useFetch<T>(urlPath: string, page: boolean) {
+  const [data, setData] = useState<T | PageResponse<T> | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -20,16 +20,16 @@ export function useFetch(urlPath: string, page: boolean) {
           const res: Response = await fetch(url);
           if (!res.ok) throw new Error('Page Request failed');
 
-          const initData: PageResponse = await res.json();
+          const initData: PageResponse<T> = await res.json();
           const count = initData.count;
 
           const totalRes: Response = await fetch(
             `${url}?offset=0&limit=${count}`,
           );
 
-          const totalData: PageResponse = await totalRes.json();
+          const totalData: PageResponse<T> = await totalRes.json();
 
-          setData(totalData.results);
+          setData(totalData);
         } catch (error) {
           if (error instanceof Error) {
             setError(error.message);
