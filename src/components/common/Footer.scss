@@ -1,0 +1,7 @@
+@use "@/base";
+
+.footer{
+    background-color: base.$color-light-blue;
+    height: base.$footer-height;
+    display: flex;
+}

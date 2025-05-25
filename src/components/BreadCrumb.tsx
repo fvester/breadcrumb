@@ -3,13 +3,19 @@ import './BreadCrumb.scss';
 import SubCrumb from './SubCrumb';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import RightArrow from '@/assets/right_arrow.svg?react';
 
 interface BreadCrumbProps {
+  className: string;
   routeHistory: RouteInfo[];
   curPath: string;
 }
 
-const BreadCrumb: React.FC<BreadCrumbProps> = ({ routeHistory, curPath }) => {
+const BreadCrumb: React.FC<BreadCrumbProps> = ({
+  className,
+  routeHistory,
+  curPath,
+}) => {
   const navigate = useNavigate();
 
   const pathClick = (path: string) => {
@@ -28,8 +34,8 @@ const BreadCrumb: React.FC<BreadCrumbProps> = ({ routeHistory, curPath }) => {
   };
 
   return (
-    <div className="bread-crumb">
-      <nav className="bread-crumb-nav">
+    <div className={`bread-crumb ${className}-bread-crumb`}>
+      <nav className={`bread-crumb-nav ${className}-bread-crumb-nav`}>
         {routeHistory.map((routeInfo: RouteInfo) => {
           const { sigName, path } = routeInfo;
           const isCur: boolean = path === curPath;
@@ -48,7 +54,11 @@ const BreadCrumb: React.FC<BreadCrumbProps> = ({ routeHistory, curPath }) => {
                 isCur={isCur}
                 pathClick={pathClick}
               />
-              <div className="bread-crumb-nav-deli"> {'>'} </div>
+              <div
+                className={`bread-crumb-nav-deli ${className}-bread-crumb-nav-deli`}
+              >
+                <RightArrow className="bread-crumb-nav-arrow" />
+              </div>
             </React.Fragment>
           );
         })}

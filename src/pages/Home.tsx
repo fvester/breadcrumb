@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import type { RouteInfo } from '@/types/components';
 import Pickchu from '@/assets/pickachu.svg?react';
 import Jiwwo from '@/assets/jiwoo.svg?react';
+import RightLink from '@/assets/right_arrow2.svg?react';
 
 // Home Page Component
 const Home: React.FC = () => {
@@ -14,7 +15,6 @@ const Home: React.FC = () => {
 
   return (
     <div className="home">
-      <BreadCrumb routeHistory={[curRouteInfo]} curPath={curPath} />
       <div className="home-container">
         <div className="home-banner">
           <div className="home-banner-left">
@@ -26,14 +26,23 @@ const Home: React.FC = () => {
             <div className="home-banner-right-pad"></div>
           </div>
         </div>
-
-        <Link
-          className="species-button"
-          to="/species"
-          state={{ prevRouteHistory: [curRouteInfo] }}
-        >
-          Pokemon Species List
-        </Link>
+        <div className="home-link">
+          <BreadCrumb
+            className="home"
+            routeHistory={[curRouteInfo]}
+            curPath={curPath}
+          />
+          <Link
+            className="home-species-btn"
+            to="/species"
+            state={{ prevRouteHistory: [curRouteInfo] }}
+          >
+            <div className="home-species-btn-content">
+              Pokemon Species List
+              <RightLink className="home-species-btn-arrow" />
+            </div>
+          </Link>
+        </div>
       </div>
     </div>
   );

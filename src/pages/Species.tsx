@@ -29,6 +29,7 @@ const Species: React.FC = () => {
     <div className="species">
       <h1>Species</h1>
       <BreadCrumb
+        className="species"
         routeHistory={[...(prevRouteHistory ?? []), curRouteInfo]}
         curPath={curPath}
       />
