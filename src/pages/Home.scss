@@ -54,6 +54,7 @@
     &-bread-crumb {
         background-color: base.$point-color-blue;
         margin-bottom: 10px;
+        position: static;
 
         &-nav {
             display: flex;
