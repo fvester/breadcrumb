@@ -12,12 +12,11 @@ import PokemonDetail from '@/pages/PokemonDetail';
 import PokemonList from '@/pages/PokemonList';
 import Species from '@/pages/Species';
 import SpeciesOverview from '@/pages/SpeciesOverview';
-import ScrollToTop from './components/ScrollToTop';
 
 // URLrouting setting
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: `${import.meta.env.BASE_URL}`,
     element: <Layout />, // For header, footer
     children: [
       {
@@ -25,19 +24,19 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/species',
+        path: 'species',
         element: <Species />,
       },
       {
-        path: '/species/:species',
+        path: 'species/:species',
         element: <SpeciesOverview />,
       },
       {
-        path: '/species/:species/pokemons',
+        path: 'species/:species/pokemons',
         element: <PokemonList />,
       },
       {
-        path: '/species/:species/pokemons/:pokemon',
+        path: 'species/:species/pokemons/:pokemon',
         element: <PokemonDetail />,
       },
     ],
