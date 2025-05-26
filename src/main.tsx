@@ -12,6 +12,7 @@ import PokemonDetail from '@/pages/PokemonDetail';
 import PokemonList from '@/pages/PokemonList';
 import Species from '@/pages/Species';
 import SpeciesOverview from '@/pages/SpeciesOverview';
+import ScrollToTop from './components/ScrollToTop';
 
 // URLrouting setting
 const router = createBrowserRouter([
