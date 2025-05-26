@@ -6,7 +6,6 @@ import { useFetch } from '@/hooks/UseFetch';
 import type { PageResponse, SpeciesMeta } from '@/types/model';
 import { useGenerateHistory } from '@/hooks/UseGenerateHistory';
 import Loader from '@/components/common/Loader';
-import { useEffect } from 'react';
 // import { useFetchRecur } from '@/hooks/UseFetchRecur';
 
 // Species List Page

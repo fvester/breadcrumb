@@ -14,7 +14,7 @@ const SpeciesOverview: React.FC = () => {
   const { curPath, prevRouteHistory } = useGenerateHistory();
   const { species: speciesId } = useParams();
 
-  const { data, isLoading, error } = useFetch<SpeciesOverviewRes>(
+  const { data, isLoading } = useFetch<SpeciesOverviewRes>(
     `/pokemon-species/${speciesId}`,
     false,
   );
