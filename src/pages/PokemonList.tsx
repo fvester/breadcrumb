@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './PokemonList.scss';
 import type { RouteInfo } from '@/types/components';
 import type { PokemonMeta, SpeciesOverviewRes } from '@/types/model';
@@ -15,7 +15,7 @@ const PokemonList: React.FC = () => {
 
   const { species: speciesId } = useParams();
 
-  const { data, isLoading, error } = useFetch<SpeciesOverviewRes>(
+  const { data, isLoading } = useFetch<SpeciesOverviewRes>(
     `/pokemon-species/${speciesId}`,
     false,
   );
