@@ -11,10 +11,10 @@ import Loader from '@/components/common/Loader';
 // Pokemon Detail page
 const PokemonDetail: React.FC = () => {
   const { curPath, prevRouteHistory } = useGenerateHistory();
-  const { species: speciesId, pokemon: pokemonId } = useParams();
+  const { pokemon: pokemonId } = useParams();
 
   // Get current page data
-  const { data, isLoading, error } = useFetch<PokemonDetailRes>(
+  const { data, isLoading } = useFetch<PokemonDetailRes>(
     `/pokemon/${pokemonId}`,
     false,
   );
