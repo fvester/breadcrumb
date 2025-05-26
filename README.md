@@ -18,6 +18,12 @@
 - lodash
 - react-toastify
 
+## 🔨 테스트 방법
+```zsh
+$ yarn install
+$ yarn run dev
+```
+
 ## ✈️ 진행 순서
 
 github issue #1: [milestone](https://github.com/fvester/breadcrumb/issues/1)
