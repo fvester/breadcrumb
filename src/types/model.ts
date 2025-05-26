@@ -37,6 +37,9 @@ export interface SpeciesOverviewRes {
 
 export interface PokemonDetailRes {
   name: string;
+  base_experience: number;
+  height: number;
+  weight: number;
   species: {
     name: string;
     url: string;
