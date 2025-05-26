@@ -16,7 +16,7 @@ import SpeciesOverview from '@/pages/SpeciesOverview';
 // URLrouting setting
 const router = createBrowserRouter([
   {
-    path: `${import.meta.env.BASE_URL}`,
+    path: `/`,
     element: <Layout />, // For header, footer
     children: [
       {
@@ -24,19 +24,19 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: 'species',
+        path: '/species',
         element: <Species />,
       },
       {
-        path: 'species/:species',
+        path: '/species/:species',
         element: <SpeciesOverview />,
       },
       {
-        path: 'species/:species/pokemons',
+        path: '/species/:species/pokemons',
         element: <PokemonList />,
       },
       {
-        path: 'species/:species/pokemons/:pokemon',
+        path: '/species/:species/pokemons/:pokemon',
         element: <PokemonDetail />,
       },
     ],
