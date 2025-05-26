@@ -6,6 +6,7 @@ import type { RouteInfo } from '@/types/components';
 import BreadCrumb from '@/components/BreadCrumb';
 import { useGenerateHistory } from '@/hooks/UseGenerateHistory';
 import { snakeToCamel } from '@/utils/string';
+import Loader from '@/components/common/Loader';
 
 // Pokemon Detail page
 const PokemonDetail: React.FC = () => {
@@ -40,6 +41,7 @@ const PokemonDetail: React.FC = () => {
 
   return (
     <div className="pokemon-detail">
+      {isLoading && <Loader />}
       <div className="pokemon-detail-container">
         <BreadCrumb
           className="pokemon-detail"
@@ -58,6 +60,9 @@ const PokemonDetail: React.FC = () => {
             <ul className="pokemon-detail-fields">
               <li className="pokemon-detail-info">height: {height}</li>
               <li className="pokemon-detail-info">weight: {weight}</li>
+              <li className="pokemon-detail-info">
+                base_experience: {baseExperience}
+              </li>
               <li className="pokemon-detail-info">species: {species?.name}</li>
             </ul>
           </div>

@@ -6,6 +6,7 @@ import { useFetch } from '@/hooks/UseFetch';
 import { snakeToCamel } from '@/utils/string';
 import BreadCrumb from '@/components/BreadCrumb';
 import { useGenerateHistory } from '@/hooks/UseGenerateHistory';
+import Loader from '@/components/common/Loader';
 
 // Pokemon List Page
 const PokemonList: React.FC = () => {
@@ -52,7 +53,7 @@ const PokemonList: React.FC = () => {
               <div>Pokemon varieties</div>
             </div>
             {isLoading ? (
-              <div> loading </div>
+              <Loader />
             ) : (
               varieties?.map((meta: PokemonMeta) => {
                 let isDefault: boolean | null = null;
