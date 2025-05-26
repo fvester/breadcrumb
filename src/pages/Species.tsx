@@ -5,14 +5,14 @@ import BreadCrumb from '@/components/BreadCrumb';
 import { useFetch } from '@/hooks/UseFetch';
 import type { PageResponse, SpeciesMeta } from '@/types/model';
 import { useGenerateHistory } from '@/hooks/UseGenerateHistory';
+import Loader from '@/components/common/Loader';
+import { useEffect } from 'react';
 // import { useFetchRecur } from '@/hooks/UseFetchRecur';
 
 // Species List Page
 const Species: React.FC = () => {
   const { curPath, prevRouteHistory } = useGenerateHistory();
   const navigage = useNavigate();
-  // Test code
-  // const { data, isLoading, error } = useFetchRecur('/pokemon-species');
 
   const { data, isLoading } = useFetch<SpeciesMeta>('/pokemon-species', true);
 
@@ -104,7 +104,7 @@ const Species: React.FC = () => {
               <div>Pokemon Species</div>
             </div>
 
-            {isLoading ? <div> loading </div> : setList}
+            {isLoading ? <Loader /> : setList}
           </ul>
         </div>
       </div>
