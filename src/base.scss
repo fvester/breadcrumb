@@ -45,3 +45,33 @@ $color-font-light: #F0F0F0;
   src: url(@/fonts/Fredoka-SemiBold.ttf);
   font-weight: 600;
 }
+
+@font-face {
+  font-family: "Noto Sans";
+  src: url(@/fonts/NotoSans-Bold.ttf);
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  src: url(@/fonts/NotoSans-Light.ttf);
+  font-weight: Light;
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  src: url(@/fonts/NotoSans-Medium.ttf);
+  font-weight: Medium;
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  src: url(@/fonts/NotoSans-Regular.ttf);
+  font-weight: Normal;
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  src: url(@/fonts/NotoSans-SemiBold.ttf);
+  font-weight: 600;
+}
