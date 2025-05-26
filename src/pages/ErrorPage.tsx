@@ -43,8 +43,12 @@ const ErrorPage: React.FC = () => {
 
   return (
     <div className="error-page">
-      <h1>Error: {reason}</h1>
-      <p>{msg}</p>
+      <div className="error-page-container">
+        <h1 className="error-page-title">
+          <span className="point">Error:</span> {reason}
+        </h1>
+        <p>{msg}</p>
+      </div>
     </div>
   );
 };
