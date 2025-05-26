@@ -7,6 +7,7 @@ import type { SpeciesOverviewName, SpeciesOverviewRes } from '@/types/model';
 import { snakeToCamel } from '@/utils/string';
 import { useGenerateHistory } from '@/hooks/UseGenerateHistory';
 import RightLink from '@/assets/right_arrow2.svg?react';
+import Loader from '@/components/common/Loader';
 
 // Species Overview Page
 const SpeciesOverview: React.FC = () => {
@@ -52,6 +53,7 @@ const SpeciesOverview: React.FC = () => {
 
   return (
     <div className="species-overview">
+      {isLoading && <Loader />}
       <div className="species-overview-container">
         <h1>{speciesName} Overview</h1>
         <BreadCrumb
