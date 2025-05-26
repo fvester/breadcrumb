@@ -1,0 +1,59 @@
+@use '@/base';
+
+.pokemon-list {
+    background-color: base.$color-font-light;
+    display: flex;
+    min-height: calc(100vh - base.$header-height - base.$footer-height);
+    justify-content: center;
+    padding-top: base.$container-padding;
+
+    &-container {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        margin-bottom: 100px;
+    }
+
+    &-varieties-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    &-varieties {
+        width: 50%;
+        background-color: white;
+        min-width: 400px;
+        min-height: 300px;
+    }
+
+    &-varieties-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 3rem;
+        background-color: base.$point-color-blue;
+        color: base.$point-color-yellow;
+        font-size: 1.2rem;
+        color: base.$point-color-yellow;
+        font-family: "Fredoka", normal;
+        
+    }
+
+    &-varieties-item {
+        box-sizing: border-box;
+        padding: 1.5em;
+        display: flex;
+        align-items: center;
+        height: 2.5rem;
+        color: base.$color-dark-gray;
+        
+        &:hover {
+            cursor: pointer;
+            color: base.$color-font-blue;
+        }
+
+        &:not(:last-child) {
+            border-bottom: 1px solid base.$color-light-gray;
+        }
+    }
+}

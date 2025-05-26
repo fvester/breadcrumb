@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import './PokemonList.scss';
 import type { RouteInfo } from '@/types/components';
 import type { PokemonMeta, SpeciesOverviewRes } from '@/types/model';
@@ -9,7 +9,8 @@ import { useGenerateHistory } from '@/hooks/UseGenerateHistory';
 
 // Pokemon List Page
 const PokemonList: React.FC = () => {
-  const { location, curPath, prevRouteHistory } = useGenerateHistory();
+  const { curPath, prevRouteHistory } = useGenerateHistory();
+  const navigage = useNavigate();
 
   const { species: speciesId } = useParams();
 
@@ -18,6 +19,18 @@ const PokemonList: React.FC = () => {
     false,
   );
 
+  const varietiesItemClick = (
+    e: React.MouseEvent,
+    speciesId: string,
+    pokemonId: number,
+  ) => {
+    navigage(`/species/${speciesId}/pokemons/${pokemonId}`, {
+      state: {
+        prevRouteHistory: [...(prevRouteHistory ?? []), curRouteInfo],
+      },
+    });
+  };
+
   const sigName = 'Pokemon List';
   const curRouteInfo: RouteInfo = { sigName: sigName, path: curPath };
 
@@ -25,57 +38,63 @@ const PokemonList: React.FC = () => {
 
   return (
     <div className="pokemon-list">
-      <h1>Pokemon List</h1>
-      <BreadCrumb
-        className="pokemon-list"
-        routeHistory={[...(prevRouteHistory ?? []), curRouteInfo]}
-        curPath={curPath}
-      />
+      <div className="pokemon-list-container">
+        <h1>Pokemon List</h1>
+        <BreadCrumb
+          className="pokemon-list"
+          routeHistory={[...(prevRouteHistory ?? []), curRouteInfo]}
+          curPath={curPath}
+        />
 
-      <ul className="pokemon-list-varieties">
-        {isLoading ? (
-          <div> loading </div>
-        ) : (
-          varieties?.map((meta: PokemonMeta) => {
-            let isDefault: boolean | null = null;
-            let pokemon: { name: string; url: string } | null = null;
+        <div className="pokemon-list-varieties-container">
+          <ul className="pokemon-list-varieties">
+            <div className="pokemon-list-varieties-title">
+              <div>Pokemon varieties</div>
+            </div>
+            {isLoading ? (
+              <div> loading </div>
+            ) : (
+              varieties?.map((meta: PokemonMeta) => {
+                let isDefault: boolean | null = null;
+                let pokemon: { name: string; url: string } | null = null;
 
-            const { isDefault: isDefaultCopy, pokemon: pokemonCopy } =
-              snakeToCamel(meta);
-            isDefault = isDefaultCopy;
-            pokemon = pokemonCopy;
+                const { isDefault: isDefaultCopy, pokemon: pokemonCopy } =
+                  snakeToCamel(meta);
+                isDefault = isDefaultCopy;
+                pokemon = pokemonCopy;
 
-            if (pokemon == null) return null;
+                if (pokemon == null) return null;
 
-            const { url, name } = pokemon;
+                const { url, name } = pokemon;
 
-            // Need optimize
-            const pokemonId = Number(url.split('/').reverse()[1]);
+                // Need optimize
+                const pokemonId = Number(url.split('/').reverse()[1]);
 
-            // Validation: If not positive number
-            if (isNaN(pokemonId) || pokemonId <= 0) {
-              return null;
-            } else {
-              return (
-                <li key={pokemonId} className="pokemon-list-varieties-item">
-                  <Link
-                    className="pokemon-list-varieties-item-link"
-                    to={`/species/${speciesId}/pokemons/${pokemonId}`}
-                    state={{
-                      prevRouteHistory: [
-                        ...(prevRouteHistory ?? []),
-                        curRouteInfo,
-                      ],
-                    }}
-                  >
-                    {name}
-                  </Link>
-                </li>
-              );
-            }
-          })
-        )}
-      </ul>
+                // Validation: If not positive number
+                if (isNaN(pokemonId) || pokemonId <= 0) {
+                  return null;
+                } else {
+                  return (
+                    <li
+                      key={pokemonId}
+                      className="pokemon-list-varieties-item"
+                      onClick={(e: React.MouseEvent) =>
+                        varietiesItemClick(
+                          e,
+                          speciesId ? speciesId : '',
+                          pokemonId,
+                        )
+                      }
+                    >
+                      <div>{name}</div>
+                    </li>
+                  );
+                }
+              })
+            )}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 };

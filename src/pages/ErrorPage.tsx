@@ -15,7 +15,7 @@ const ErrorPage: React.FC = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate('/');
-    }, 5000);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -39,7 +39,7 @@ const ErrorPage: React.FC = () => {
     }
   }
 
-  msg += '\n Go home after 5 seconds...';
+  msg += '\n Go home after 3 seconds...';
 
   return (
     <div className="error-page">
