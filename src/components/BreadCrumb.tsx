@@ -4,6 +4,7 @@ import SubCrumb from './SubCrumb';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RightArrow from '@/assets/right_arrow.svg?react';
+import { toast } from 'react-toastify';
 
 interface BreadCrumbProps {
   className: string;
@@ -31,7 +32,10 @@ const BreadCrumb: React.FC<BreadCrumbProps> = ({
   }, []);
 
   const pathClick = (path: string) => {
-    console.log(`Navigate to ${path}`);
+    // Toast navigate message
+    toast(`Navigate to ${path}`, {
+      autoClose: 1500,
+    });
 
     // Make prevRouteHistory
     const idx = routeHistory.findIndex((routeInfo) => routeInfo.path == path);
