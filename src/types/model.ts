@@ -29,6 +29,8 @@ export interface PokemonMeta {
 export interface SpeciesOverviewRes {
   names: SpeciesOverviewName[];
   base_happiness: number;
+  captureRate: number;
+  has_gender_differences: boolean;
   varieties: PokemonMeta;
   [key: string]: any;
 }

@@ -6,6 +6,7 @@ import { useFetch } from '@/hooks/UseFetch';
 import type { SpeciesOverviewName, SpeciesOverviewRes } from '@/types/model';
 import { snakeToCamel } from '@/utils/string';
 import { useGenerateHistory } from '@/hooks/UseGenerateHistory';
+import RightLink from '@/assets/right_arrow2.svg?react';
 
 // Species Overview Page
 const SpeciesOverview: React.FC = () => {
@@ -19,13 +20,22 @@ const SpeciesOverview: React.FC = () => {
 
   let names: SpeciesOverviewName[] | null = null;
   let baseHappiness: number | null = null;
+  let captureRate: number | null = null;
+  let hasGenderDifferences: boolean | null = null;
 
   // Need snake_case -> camelCase mapping function
   if (data !== null) {
-    const { names: namesCopy, baseHappiness: baseHappinessCopy } =
-      snakeToCamel(data);
+    const {
+      names: namesCopy,
+      baseHappiness: baseHappinessCopy,
+      captureRate: captureRateCopy,
+      hasGenderDifferences: hasGenderDifferencesCopy,
+    } = snakeToCamel(data);
+
     names = namesCopy;
     baseHappiness = baseHappinessCopy;
+    captureRate = captureRateCopy;
+    hasGenderDifferences = hasGenderDifferencesCopy;
   }
 
   // Get name
@@ -42,22 +52,45 @@ const SpeciesOverview: React.FC = () => {
 
   return (
     <div className="species-overview">
-      <h1>Species Overview</h1>
-      <BreadCrumb
-        className="species-overview"
-        routeHistory={[...(prevRouteHistory ?? []), curRouteInfo]}
-        curPath={curPath}
-      />
+      <div className="species-overview-container">
+        <h1>{speciesName} Overview</h1>
+        <BreadCrumb
+          className="species-overview"
+          routeHistory={[...(prevRouteHistory ?? []), curRouteInfo]}
+          curPath={curPath}
+        />
 
-      <Link
-        className="species-overview-button"
-        to={`/species/${speciesId}/pokemons`}
-        state={{
-          prevRouteHistory: [...(prevRouteHistory ?? []), curRouteInfo],
-        }}
-      >
-        Show pokemon List
-      </Link>
+        <div className="species-overview-area">
+          <ul className="species-overview-fields">
+            <li className="species-overview-info">
+              base_happiness: {baseHappiness}{' '}
+            </li>
+            <li className="species-overview-info">
+              capture_rate: {captureRate}
+            </li>
+            <li className="species-overview-info">
+              has_gender_differences: {hasGenderDifferences ? 'Yes' : 'No'}
+            </li>
+          </ul>
+          <div className="species-overview-pokemons">
+            <Link
+              className="species-overview-btn"
+              to={`/species/${speciesId}/pokemons`}
+              state={{
+                prevRouteHistory: [...(prevRouteHistory ?? []), curRouteInfo],
+              }}
+            >
+              <div className="species-overview-btn-content">
+                Show pokemon List
+              </div>
+              <RightLink
+                className="species-overview-link-icon"
+                style={{ width: '1em', paddingLeft: '2px' }}
+              />
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
