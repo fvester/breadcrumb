@@ -1,0 +1,68 @@
+@use '@/base';
+
+h1 {
+    margin-bottom: 40px;
+    text-align: center;
+    color: base.$color-black;
+}
+.species-overview {
+    background-color: base.$color-font-light;
+    display: flex;
+    min-height: calc(100vh - base.$header-height - base.$footer-height);
+    justify-content: center;
+    padding-top: base.$container-padding;
+
+    &-container {
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+        margin-bottom: 60px;
+        min-width: 510px;
+    }
+
+    &-area {
+        display: flex;
+        background-color: white;
+        padding: 30px;
+    }
+
+    &-fields {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 50px 0;
+        height: 100%;
+        color: base.$color-dark-gray;
+
+    }
+
+    &-pokemons {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &-btn-content {
+        padding-top: 4px;
+        vertical-align: middle;
+    }
+
+    &-btn {
+        display:flex;
+        color: base.$color-black;
+
+        &:hover {
+            color: base.$color-font-blue;
+            
+            .species-overview-link-icon {
+                fill: base.$color-font-blue;
+            }
+        }
+    }
+
+    &-info {
+        padding: 1rem;
+    }
+}

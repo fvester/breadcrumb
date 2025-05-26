@@ -1,6 +1,6 @@
 import type { RouteInfo } from '@/types/components';
 import './Species.scss';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import BreadCrumb from '@/components/BreadCrumb';
 import { useFetch } from '@/hooks/UseFetch';
 import type { PageResponse, SpeciesMeta } from '@/types/model';
@@ -9,15 +9,12 @@ import { useGenerateHistory } from '@/hooks/UseGenerateHistory';
 
 // Species List Page
 const Species: React.FC = () => {
-  const { location, curPath, prevRouteHistory } = useGenerateHistory();
+  const { curPath, prevRouteHistory } = useGenerateHistory();
   const navigage = useNavigate();
   // Test code
   // const { data, isLoading, error } = useFetchRecur('/pokemon-species');
 
-  const { data, isLoading, error } = useFetch<SpeciesMeta>(
-    '/pokemon-species',
-    true,
-  );
+  const { data, isLoading } = useFetch<SpeciesMeta>('/pokemon-species', true);
 
   const listItemClick = (e: React.MouseEvent, speciesId: number) => {
     navigage(`/species/${speciesId}`, {
@@ -56,7 +53,7 @@ const Species: React.FC = () => {
     // Make setList var
     for (const alphabet in sectionObj) {
       const sectionComp = (
-        <ul>
+        <ul key={alphabet}>
           <div className="species-list-header">
             <div>{alphabet.toUpperCase()}</div>
           </div>
@@ -87,8 +84,6 @@ const Species: React.FC = () => {
       sectionArr.push(sectionComp);
     }
 
-    console.log(sectionArr);
-
     setList = (
       <div className="species-list-content">{sectionArr.map((v) => v)}</div>
     );
@@ -97,13 +92,11 @@ const Species: React.FC = () => {
   return (
     <div className="species">
       <div className="species-container">
-        <div className="species-align">
-          <BreadCrumb
-            className="species"
-            routeHistory={[...(prevRouteHistory ?? []), curRouteInfo]}
-            curPath={curPath}
-          />
-        </div>
+        <BreadCrumb
+          className="species"
+          routeHistory={[...(prevRouteHistory ?? []), curRouteInfo]}
+          curPath={curPath}
+        />
 
         <div className="species-list-container">
           <ul className="species-list">
