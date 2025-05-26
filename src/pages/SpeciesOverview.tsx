@@ -24,7 +24,7 @@ const SpeciesOverview: React.FC = () => {
   let hasGenderDifferences: boolean | null = null;
 
   // Need snake_case -> camelCase mapping function
-  if (data !== null) {
+  if (data) {
     const {
       names: namesCopy,
       baseHappiness: baseHappinessCopy,
