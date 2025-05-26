@@ -1,9 +1,5 @@
 # 🐩 Pokedex - 포켓몬 도감
 
-## Github page URL
-
-https://fvester.github.io/breadcrumb/
-
 ## 📖 과제 개요
 
 해당 과제는 Breadcrumb UI를 Pokeapi를 활용해 제작하는 것이다.
